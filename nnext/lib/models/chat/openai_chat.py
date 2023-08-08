@@ -9,6 +9,8 @@ from time import sleep
 from pprint import pformat
 
 # External Libraries
+import litellm
+from litellm import completion
 import redis
 from loguru import logger
 import openai
@@ -38,7 +40,7 @@ async def openai_chat(messages, *args, **kwargs):
             msg = fmt_payload(messages)
 
             logger.debug(f"Calling openai_chat with {msg}")
-            response = openai.ChatCompletion.create(
+            response = completion(
                 model="gpt-3.5-turbo",
                 messages=messages
             )
